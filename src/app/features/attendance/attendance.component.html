@@ -1,0 +1,97 @@
+<div class="d-flex flex-column min-vh-100 bg-body">
+  <app-header />
+
+  <!-- Main -->
+  <main class="flex-grow-1" style="padding-top: calc(3.5rem + env(safe-area-inset-top, 0px)); padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px))">
+    <div class="container py-3" style="max-width: 430px">
+      <!-- Status badges -->
+      <div class="d-flex align-items-center justify-content-between mb-3">
+        <span class="badge rounded-pill text-bg-light border d-inline-flex align-items-center gap-2 text-uppercase">
+          <span class="spinner-grow spinner-grow-sm text-success" style="width: 0.5rem; height: 0.5rem" aria-hidden="true"></span>
+          <span [class.text-success]="!isCheckedIn()" [class.text-primary]="isCheckedIn()">{{ statusText() }}</span>
+        </span>
+        <span class="badge rounded-pill text-bg-light border fw-medium">
+          <i class="bi bi-patch-check-fill text-success me-1"></i>GPS Verified
+        </span>
+      </div>
+
+      <!-- Clock & location -->
+      <div class="card bg-body-tertiary text-center mb-3">
+        <div class="card-body">
+          <small class="text-secondary text-uppercase fw-semibold">{{ dateText }}</small>
+          <div class="d-flex align-items-baseline justify-content-center gap-2 my-1">
+            <span class="display-3 fw-bold">{{ clockText }}</span>
+            <span class="fs-5 fw-semibold text-secondary">{{ ampm }}</span>
+          </div>
+          <div class="d-inline-flex align-items-center gap-2 bg-body rounded-pill shadow-sm px-3 py-2 mw-100">
+            <i class="bi bi-geo-alt-fill text-success"></i>
+            <small class="fw-medium text-truncate">HQ - 4th Floor Tech Hub</small>
+            <span class="badge rounded-pill text-bg-success">In Area</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Action button -->
+      <div class="d-grid mb-3">
+        <button
+          type="button"
+          class="btn btn-lg py-3 fw-semibold d-flex align-items-center justify-content-center gap-2"
+          [class.btn-primary]="!isCheckedIn()"
+          [class.btn-danger]="isCheckedIn()"
+          (click)="toggleClock()">
+          <i class="bi bi-fingerprint fs-4"></i>
+          <span>{{ actionText() }}</span>
+        </button>
+      </div>
+
+      <!-- Shift schedule -->
+      <div class="card bg-body-tertiary mb-3">
+        <div class="card-body d-flex align-items-center justify-content-between">
+          <div class="d-flex align-items-center gap-3">
+            <div class="d-flex align-items-center justify-content-center rounded-3 bg-primary-subtle text-primary p-2">
+              <i class="bi bi-calendar-event fs-5"></i>
+            </div>
+            <div class="lh-sm">
+              <small class="text-secondary text-uppercase fw-semibold d-block">Today's Shift</small>
+              <span class="fw-semibold">09:00 AM – 05:30 PM</span>
+            </div>
+          </div>
+          <span class="badge rounded-pill text-bg-light text-primary shadow-sm">8.5h Total</span>
+        </div>
+      </div>
+
+      <!-- Metrics -->
+      <div class="row row-cols-3 g-2 mb-3 text-center">
+        <div class="col">
+          <div class="card bg-body-tertiary h-100">
+            <div class="card-body p-2">
+              <small class="text-secondary text-uppercase fw-semibold d-block">First In</small>
+              <div class="fw-semibold">{{ firstIn() }}</div>
+              <small class="text-secondary">Morning</small>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card bg-body-tertiary h-100">
+            <div class="card-body p-2">
+              <small class="text-secondary text-uppercase fw-semibold d-block">Total Time</small>
+              <div class="fw-semibold">{{ totalTime() }}</div>
+              <small class="text-success fw-medium">Active</small>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <div class="card bg-body-tertiary h-100">
+            <div class="card-body p-2">
+              <small class="text-secondary text-uppercase fw-semibold d-block">Target</small>
+              <div class="fw-semibold">8.0h</div>
+              <small class="text-secondary">Standard</small>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <app-bottom-nav active="attendance" />
+</div>

@@ -1,0 +1,32 @@
+<header class="app-header bg-body border-bottom">
+  <div class="container d-flex align-items-center justify-content-between py-2" style="max-width: 430px">
+    <div class="d-flex align-items-center gap-2">
+      <img
+        [alt]="logoAlt"
+        class="img-fluid"
+        style="height: 32px; width: auto"
+        [src]="logoUrl" />
+
+      @if (title || subtitle) {
+        <div class="lh-1">
+          @if (title) {
+            <div class="fw-semibold">{{ title }}</div>
+          }
+          @if (subtitle) {
+            <small class="text-secondary text-uppercase">{{ subtitle }}</small>
+          }
+        </div>
+      }
+    </div>
+
+    <button type="button" class="btn btn-light rounded-circle p-1 position-relative" aria-label="Profile">
+      <img
+        alt="Profile"
+        class="rounded-circle object-fit-cover"
+        width="36"
+        height="36"
+        [src]="profileUrl" />
+      <span class="position-absolute bottom-0 end-0 p-1 bg-success border border-2 border-white rounded-circle"></span>
+    </button>
+  </div>
+</header>

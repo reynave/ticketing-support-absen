@@ -1,0 +1,88 @@
+<div class="d-flex flex-column min-vh-100 bg-body-tertiary">
+  <main class="container my-auto py-4" style="max-width: 430px">
+    <!-- Header -->
+    <div class="text-center mb-4">
+      <img
+        alt="Thinktank Logo"
+        class="img-fluid"
+        width="90%"
+        height="auto"
+        src="https://8thinktank.com/wp-content/uploads/2024/05/think-tank-solusindo.png" />
+
+      <h1 class="h2 fw-bold mt-3 mb-1">Thinktank Login</h1>
+      <p class="text-secondary mb-0">Sign in to record your attendance</p>
+    </div>
+
+    <!-- Form card -->
+    <div class="card border-0 shadow-sm rounded-4">
+      <form class="card-body p-4" novalidate (ngSubmit)="onSubmit()">
+        <div class="mb-3">
+          <label for="identifier" class="form-label fw-semibold">Email or Employee ID</label>
+          <div class="input-group input-group-lg">
+            <span class="input-group-text"><i class="bi bi-person-badge"></i></span>
+            <input
+              type="text"
+              class="form-control"
+              id="identifier"
+              name="identifier"
+              autocomplete="username"
+              placeholder="name@company.com or employee ID"
+              [(ngModel)]="form.identifier" />
+          </div>
+        </div>
+
+        <div class="mb-3">
+          <label for="password" class="form-label fw-semibold">Password</label>
+          <div class="input-group input-group-lg">
+            <span class="input-group-text"><i class="bi bi-lock"></i></span>
+            <input
+              [type]="showPassword() ? 'text' : 'password'"
+              class="form-control"
+              id="password"
+              name="password"
+              autocomplete="current-password"
+              placeholder="Enter your security passcode"
+              [(ngModel)]="form.password" />
+            <button
+              class="btn btn-outline-secondary"
+              type="button"
+              aria-label="Toggle password visibility"
+              (click)="togglePassword()">
+              <i [class]="showPassword() ? 'bi bi-eye-slash' : 'bi bi-eye'"></i>
+            </button>
+          </div>
+        </div>
+
+        <div class="form-check mb-3">
+          <input
+            class="form-check-input"
+            type="checkbox"
+            id="remember-me"
+            name="rememberMe"
+            [(ngModel)]="form.rememberMe" />
+          <label class="form-check-label text-secondary" for="remember-me">Keep me signed in</label>
+        </div>
+
+        <button
+          type="submit"
+          class="btn btn-primary btn-lg w-100 d-flex align-items-center justify-content-center gap-2">
+          <span>Sign In</span>
+          <i class="bi bi-arrow-right"></i>
+        </button>
+
+        <p class="text-center text-secondary small mt-3 mb-0">
+          Forgot password?
+          <a href="#admin-support" class="fw-semibold text-decoration-none">Contact your administrator</a>
+        </p>
+      </form>
+    </div>
+
+    <!-- Footer -->
+    <div class="text-center mt-4">
+      <span class="badge rounded-pill text-bg-light border text-secondary fw-normal py-2 px-3">
+        <i class="bi bi-shield-check text-success me-1"></i>Protected by SSL security
+      </span>
+      <p class="small text-body-tertiary mt-2 mb-0">Build version 1.0.0</p>
+    </div>
+  </main>
+</div>

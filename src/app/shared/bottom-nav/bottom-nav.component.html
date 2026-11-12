@@ -1,0 +1,51 @@
+<nav class="app-bottom-nav bg-body border-top">
+  <div class="container d-flex justify-content-around py-2" style="max-width: 430px">
+    <a
+      routerLink="/attendance"
+      [attr.aria-current]="active === 'attendance' ? 'page' : null"
+      [class.text-primary]="active === 'attendance'"
+      [class.text-secondary]="active !== 'attendance'"
+      [class.fw-semibold]="active === 'attendance'"
+      class="d-flex flex-column align-items-center text-decoration-none flex-fill">
+      <span
+        class="px-3 py-1"
+        [class.rounded-pill]="active === 'attendance'"
+        [class.bg-primary-subtle]="active === 'attendance'">
+        <i class="bi bi-clock fs-5"></i>
+      </span>
+      <small>Attendance</small>
+    </a>
+
+    <a
+      routerLink="/history"
+      [attr.aria-current]="active === 'history' ? 'page' : null"
+      [class.text-primary]="active === 'history'"
+      [class.text-secondary]="active !== 'history'"
+      [class.fw-semibold]="active === 'history'"
+      class="d-flex flex-column align-items-center text-decoration-none flex-fill">
+      <span
+        class="px-3 py-1"
+        [class.rounded-pill]="active === 'history'"
+        [class.bg-primary-subtle]="active === 'history'">
+        <i class="bi bi-calendar-range fs-5"></i>
+      </span>
+      <small>History</small>
+    </a>
+
+    <a
+      routerLink="/profile"
+      [attr.aria-current]="active === 'profile' ? 'page' : null"
+      [class.text-primary]="active === 'profile'"
+      [class.text-secondary]="active !== 'profile'"
+      [class.fw-semibold]="active === 'profile'"
+      class="d-flex flex-column align-items-center text-decoration-none flex-fill">
+      <span
+        class="px-3 py-1"
+        [class.rounded-pill]="active === 'profile'"
+        [class.bg-primary-subtle]="active === 'profile'">
+        <i class="fs-5" [class.bi-person-fill]="active === 'profile'" [class.bi-person]="active !== 'profile'"></i>
+      </span>
+      <small>Profile</small>
+    </a>
+  </div>
+</nav>
