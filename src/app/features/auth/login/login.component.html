@@ -63,11 +63,22 @@
           <label class="form-check-label text-secondary" for="remember-me">Keep me signed in</label>
         </div>
 
+        <div *ngIf="errorMessage()" class="alert alert-danger py-2 small mb-3" role="alert">
+          <i class="bi bi-exclamation-triangle-fill me-1"></i>{{ errorMessage() }}
+        </div>
+
         <button
           type="submit"
-          class="btn btn-primary btn-lg w-100 d-flex align-items-center justify-content-center gap-2">
-          <span>Sign In</span>
-          <i class="bi bi-arrow-right"></i>
+          class="btn btn-primary btn-lg w-100 d-flex align-items-center justify-content-center gap-2"
+          [disabled]="loading()">
+          <ng-container *ngIf="!loading()">
+            <span>Sign In</span>
+            <i class="bi bi-arrow-right"></i>
+          </ng-container>
+          <ng-container *ngIf="loading()">
+            <span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span>
+            <span>Signing in...</span>
+          </ng-container>
         </button>
 
         <p class="text-center text-secondary small mt-3 mb-0">

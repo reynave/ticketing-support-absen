@@ -1,49 +1,41 @@
 <div class="d-flex flex-column min-vh-100 bg-body">
-  <app-header 
-    title="Profile"
-    subtitle="Profile Settings" />
+  <app-header title="Profile" subtitle="Profile Settings" />
 
   <main class="flex-grow-1" style="padding-top: calc(3.5rem + env(safe-area-inset-top, 0px)); padding-bottom: calc(4.5rem + env(safe-area-inset-bottom, 0px))">
     <div class="container py-3" style="max-width: 430px">
+      <div *ngIf="loading()" class="text-center text-secondary py-5">
+        <span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>
+        <span>Loading profile...</span>
+      </div>
 
-      <!-- Identity card -->
       <section class="card border-0 shadow-sm text-center mb-4">
         <div class="card-body p-4">
           <div class="position-relative d-inline-block mb-3">
-            <div class="rounded-circle bg-primary-subtle text-primary fw-bold fs-2 d-flex align-items-center justify-content-center shadow-sm"
-                 style="width: 6rem; height: 6rem">AM</div>
+            <div class="rounded-circle bg-primary-subtle text-primary fw-bold fs-2 d-flex align-items-center justify-content-center shadow-sm" style="width: 6rem; height: 6rem">{{ initials() || '--' }}</div>
             <span class="position-absolute bottom-0 end-0 p-2 bg-success border border-2 border-white rounded-circle"></span>
           </div>
 
-          <h1 class="h4 fw-semibold mb-0">Alex Morgan</h1>
-          <p class="text-secondary mb-2">Senior Product Designer</p>
+          <h1 class="h4 fw-semibold mb-0">{{ fullName() }}</h1>
+          <p class="text-secondary mb-2">{{ position() }}</p>
 
-          <span class="badge rounded-pill text-bg-light border text-uppercase text-secondary">
-            <i class="bi bi-circle-fill text-success me-1" style="font-size: 0.5rem"></i>Active • Full-Time
+          <span *ngIf="statusLabel()" class="badge rounded-pill text-bg-light border text-uppercase text-secondary">
+            <i class="bi bi-circle-fill text-success me-1" style="font-size: 0.5rem"></i>{{ statusLabel() }}
           </span>
 
-          <div class="row g-2 mt-3">
-            <div class="col-6">
+          <div class="row g-2 mt-3" *ngIf="tenure()">
+            <div class="col-12">
               <div class="bg-body-tertiary rounded-3 p-2">
                 <small class="text-secondary text-uppercase fw-semibold d-block">Tenure</small>
-                <span class="fw-semibold">2 yrs 4 mos</span>
-              </div>
-            </div>
-            <div class="col-6">
-              <div class="bg-body-tertiary rounded-3 p-2">
-                <small class="text-secondary text-uppercase fw-semibold d-block">Current Site</small>
-                <span class="fw-semibold">HQ Building B</span>
+                <span class="fw-semibold">{{ tenure() }}</span>
               </div>
             </div>
           </div>
         </div>
       </section>
 
-      <!-- Employment details -->
       <section class="mb-4">
         <div class="d-flex justify-content-between align-items-center px-1 mb-2">
           <h2 class="small text-secondary text-uppercase fw-bold mb-0">Employment Details</h2>
-          <small class="text-primary fw-bold">VERIFIED</small>
         </div>
         <div class="list-group shadow-sm rounded-3">
           <div class="list-group-item d-flex align-items-center gap-3 p-3">
@@ -52,7 +44,7 @@
             </div>
             <div class="flex-grow-1 lh-sm">
               <small class="text-secondary text-uppercase fw-semibold d-block">Employee ID</small>
-              <span class="fw-semibold">EMP-84920</span>
+              <span class="fw-semibold">{{ employeeId() }}</span>
             </div>
             <i class="bi bi-lock text-body-tertiary"></i>
           </div>
@@ -63,29 +55,15 @@
             </div>
             <div class="flex-grow-1 lh-sm text-truncate">
               <small class="text-secondary text-uppercase fw-semibold d-block">Department</small>
-              <span class="fw-medium">Product &amp; Design</span>
+              <span class="fw-medium">{{ department() }}</span>
             </div>
-            <span class="badge rounded-pill bg-primary-subtle text-primary-emphasis">Core Team</span>
-          </div>
-
-          <div class="list-group-item d-flex align-items-center gap-3 p-3">
-            <div class="d-flex align-items-center justify-content-center rounded-circle bg-body-secondary text-primary flex-shrink-0" style="width: 2.5rem; height: 2.5rem">
-              <i class="bi bi-calendar-event fs-5"></i>
-            </div>
-            <div class="flex-grow-1 lh-sm">
-              <small class="text-secondary text-uppercase fw-semibold d-block">Work Schedule</small>
-              <span class="fw-medium">Mon - Fri, 08:00 - 17:00</span>
-            </div>
-            <i class="bi bi-lock text-body-tertiary"></i>
           </div>
         </div>
       </section>
 
-      <!-- Contact channels -->
       <section class="mb-4">
         <div class="d-flex justify-content-between align-items-center px-1 mb-2">
           <h2 class="small text-secondary text-uppercase fw-bold mb-0">Contact Channels</h2>
-          <small class="text-secondary fw-bold">SSO LINKED</small>
         </div>
         <div class="list-group shadow-sm rounded-3">
           <div class="list-group-item d-flex align-items-center gap-3 p-3">
@@ -94,18 +72,18 @@
             </div>
             <div class="flex-grow-1 lh-sm text-truncate">
               <small class="text-secondary text-uppercase fw-semibold d-block">Corporate Email</small>
-              <span class="fw-medium">alex.morgan&#64;shiftpulse.com</span>
+              <span class="fw-medium">{{ email() }}</span>
             </div>
             <i class="bi bi-lock text-body-tertiary"></i>
           </div>
 
-          <div class="list-group-item d-flex align-items-center gap-3 p-3">
+          <div *ngIf="phone()" class="list-group-item d-flex align-items-center gap-3 p-3">
             <div class="d-flex align-items-center justify-content-center rounded-circle bg-body-secondary text-primary flex-shrink-0" style="width: 2.5rem; height: 2.5rem">
               <i class="bi bi-telephone fs-5"></i>
             </div>
             <div class="flex-grow-1 lh-sm">
               <small class="text-secondary text-uppercase fw-semibold d-block">Direct Phone</small>
-              <span class="fw-medium">+1 (555) 234-5678</span>
+              <span class="fw-medium">{{ phone() }}</span>
             </div>
             <i class="bi bi-lock text-body-tertiary"></i>
           </div>
@@ -117,22 +95,17 @@
         <i class="bi bi-shield-lock-fill text-primary fs-5"></i>
         <div>
           <div class="fw-semibold">Managed Account</div>
-          <small class="text-secondary">
-            To change your personal details, shift assignment, or password credentials, please contact your organization administrator.
-          </small>
+          <small class="text-secondary">To change your personal details, shift assignment, or password credentials, please contact your organization administrator.</small>
         </div>
       </div>
 
       <!-- Logout -->
       <div class="d-grid">
-        <button type="button" class="btn btn-danger text-white btn-lg d-flex align-items-center justify-content-center gap-2"
-          data-bs-toggle="modal" data-bs-target="#logoutModal">
+        <button type="button" class="btn btn-danger text-white btn-lg d-flex align-items-center justify-content-center gap-2" data-bs-toggle="modal" data-bs-target="#logoutModal">
           <i class="bi bi-box-arrow-right"></i>
           <span>Log Out</span>
         </button>
       </div>
-      <p class="text-center small text-secondary text-uppercase mt-3 mb-0">ShiftPulse v2.4 • Build 8412</p>
-
     </div>
   </main>
 
