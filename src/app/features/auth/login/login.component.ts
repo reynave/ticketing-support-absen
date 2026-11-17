@@ -3,6 +3,7 @@ import { Component, OnInit, inject, signal } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../../core/services/auth.service';
+import { buildInfo } from '../../../../environments/build-info';
 
 interface LoginForm {
   identifier: string;
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
   showPassword = signal<boolean>(false);
   loading = signal<boolean>(false);
   errorMessage = signal<string>('');
+  ngBuildCode: string = buildInfo.buildCode;
 
   ngOnInit(): void {
     if (this.authService.isAuthenticated) {
